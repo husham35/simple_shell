@@ -12,5 +12,7 @@
 #include <errno.h>
 #include <stddef.h>
 
+void prompt(void);
+
 
 #endif  /** shell_h header file**/
