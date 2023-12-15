@@ -83,7 +83,8 @@ void cmd_chk(ss_info *info)
 	else
 	{
 		/* check if the command is in the current directory */
-		if ((frm_trm(info) || c_get_env(info, "PATH=") || info->argv[0][0] == '/') && chk_exec(info, info->argv[0]))
+		if ((frm_trm(info) || c_get_env(info, "PATH=") || info->argv[0][0] == '/')
+				&& chk_exec(info, info->argv[0]))
 			init_prcs(info);
 		else if (*(info->arg) != '\n')
 		{

@@ -65,8 +65,7 @@ char *_str_n_cat(char *d, char *s, int n)
 */
 char *_str_chr(char *s, char c)
 {
-	do
-	{
+	do {
 		if (*s == c)
 			return (s);
 	} while (*s++ != '\0');
