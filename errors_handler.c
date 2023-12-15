@@ -103,8 +103,7 @@ char *alter_base(long int number, int b, int f)
 	array = f & BCLOWER ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
-	do
-	{
+	do {
 		*--ptr = array[n % b];
 		n /= b;
 	} while (n != 0);
