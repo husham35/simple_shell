@@ -61,7 +61,8 @@ char **str_to_words(char *str, char *delim)
 	if (!delim)
 		delim = " ";
 	for (i = 0; str[i] != '\0'; i++)
-		if (!chk_delim(str[i], delim) && (chk_delim(str[i + 1], delim) || !str[i + 1]))
+		if (!chk_delim(str[i], delim) && (chk_delim(str[i + 1], delim)
+					|| !str[i + 1]))
 			num_words++;
 	if (num_words == 0)
 		return (NULL);

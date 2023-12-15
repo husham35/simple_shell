@@ -73,8 +73,9 @@ void chk_chn(ss_info *info, char *b, size_t *ptr, size_t i, size_t l)
 int change_v(ss_info *info)
 {
 	list_str *node;
+	int i;
 
-	for (int i = 0; info->argv[i]; i++)
+	for (i = 0; info->argv[i]; i++)
 	{
 		if (info->argv[i][0] != '$' || !info->argv[i][1])
 			continue;
