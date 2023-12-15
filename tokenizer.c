@@ -10,42 +10,43 @@
 
 char **expld_str(char *str, char *delims, size_t *num_w)
 {
-	int v, no_of_words;
+	int vec, num_wds;
 	char **words, *str_ptr = str;
-	unsigned int c, word_sizes[MAXWDCOUNT];
+	unsigned int c, wd_size[MAXWDCOUNT];
 
-	mk_zeroes(word_sizes, MAXWDCOUNT);
-	no_of_words = wds_cnt(str, delims, word_sizes);
-	if (no_of_words == 0)
+	mk_zeroes(wd_size, MAXWDCOUNT);
+	num_wds = wds_cnt(str, delims, wd_size);
+	if (num_wds == 0)
 		return (NULL);
-	words = malloc((sizeof(char *) * no_of_words) + 1);
+	words = malloc((sizeof(char *) * num_wds) + 1);
 	if (!words)
 		return (NULL);
-	for (v = 0; v < no_of_words; v++)
+	for (vec = 0; vec < num_wds; vec++)
 	{
-		words[v] = malloc((sizeof(char) * word_sizes[v]) + 1);
-		if (!words[v])
+		words[vec] = malloc((sizeof(char) * wd_size[vec]) + 1);
+		if (!words[vec])
 		{
-			for (v--; v >= 0; v--)
-				free(words[v]);
+			for (vec--; vec >= 0; vec--)
+				free(words[vec]);
 			free(words);
 			return (NULL);
 		}
-		for (c = 0; c < word_sizes[v]; c++, str_ptr++)
+		for (c = 0; c < wd_size[vec]; c++, str_ptr++)
 		{
 			while (chk_delim(*str_ptr, delims))
 				str_ptr++;
-			words[v][c] = *str_ptr;
+			words[vec][c] = *str_ptr;
 		};
-		words[v][c] = '\0';
+		words[vec][c] = '\0';
 	}
-	*num_w = no_of_words;
-	words[v] = NULL;
+	*num_w = num_wds;
+	words[vec] = NULL;
 	return (words);
 }
 
 /**
- * **str_to_words - tokenizes a string into words ignoring repeated delimiters
+ * **str_to_words - tokenizes a string into words
+ * avoiding repeated delimiters
  * @str: parsed string
  * @delim: delimeter
  * Return: a pointer to an array of strings, else NULL
@@ -60,8 +61,7 @@ char **str_to_words(char *str, char *delim)
 	if (!delim)
 		delim = " ";
 	for (i = 0; str[i] != '\0'; i++)
-		if (!chk_delim(str[i], delim) && (chk_delim(str[i + 1], delim)
-					|| !str[i + 1]))
+		if (!chk_delim(str[i], delim) && (chk_delim(str[i + 1], delim) || !str[i + 1]))
 			num_words++;
 	if (num_words == 0)
 		return (NULL);
